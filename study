@@ -1,0 +1,74 @@
+1- configuration ussing ADB commands
+  adb connect 192.168.56.103:5555
+  adb devices  #show if it is connected or not
+  adb install fb.apk
+  abd uninstall com.facebook.katana
+  adb push fb.apk /sdcard/Download/
+  adb pull /sdcard/Download/fb.apk /home/ed/Downloads/
+
+-----------------------------------------------------------------------------------
+2- reverse Engineering using APKTool and jadx
+
+  unzip fb.apk -d fb_apk_contents
+  apktool d ~/Downloads/fb.apk -o ~/Downloads/fb_apk_decompiled
+  jadx ~/Downloads/fb.apk -d ~/Downloads/fb_apk_java
+
+-------------------------------------------------------------------------------------
+3- Dexfile
+  Unzip -d extracted_folder fb.apk
+  dexdump -l plain classess.dex
+  /home/ed/dex2jar/d2j-dex2jar.sh classess.dex
+  #open dex2jar
+  #save as the folder -classes-dex2jar.jar
+  #go to extracted folder
+  unzip classes-dex2jar.jar.src.zip-d /home/ed/extracted_folder/decomplied/
+-----------------------------------------------------------------------------------------
+mobsf needs windows
+download docker desktop and also in powershell install pip install docker
+run dockerdesktop background 
+open powershell
+docker pull opensecurity/mobile-security-framework-mobsf:latest
+docker run -it --rm -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest
+
+# Default username and password: mobsf/mobsf
+
+edit 
+"C:\Users\VISHNULAL\.MobSF\config.py"
+ANALYZER_IDENTIFIER = os.getenv('MOBSF_ANALYZER_IDENTIFIER', '192.168.56.101:5555')
+
+then install any apk with malware and analyse 
+
+----------------------------------------------------------------------------
+5- drozer
+
+adb connect <ip>
+adb install drozer-agent.apk #download from site
+open drozer agent in android and open it 
+copy the id - 31415
+adb forward tcp:31415 tcp 31415
+drozer console connect
+
+run app.package.list
+run app.package.debuggable
+run app.package.info -a com.fb.katana # fb is on my pc so yours will be different
+run app.package.attacksurface com.fb.katana
+---------------------------------------------------------------------------------
+6- traffic analyse (https://www.youtube.com/watch?v=ukbEFRi1Zl4&t=1s)
+
+open burp suite
+proxy->option->add->specific address-> #choose ip start from 198.like it might ne system ip
+add port number 5555
+
+on mobile 
+-> click on wifi
+-> click on wifi simbol->modify network->advanced option
+->make it manual and fill ip and port nimber accourdingly
+
+turn on interception in burpsuite then collect network
+#there you get a id which you havd to install http://burp/ on android
+download ca certificate
+in setting ->security install from unknown source
+open in file location ->rename the extension to der to cer
+then install it
+
+
