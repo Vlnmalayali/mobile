@@ -50,7 +50,7 @@ drozer console connect
 
 run app.package.list
 run app.package.debuggable
-run app.package.info -a com.fb.katana # fb is on my pc so yours will be different
+run app.package.info -a com.facebook.katana # fb is on my pc so yours will be different
 run app.package.attacksurface com.fb.katana
 ---------------------------------------------------------------------------------
 6- traffic analyse (https://www.youtube.com/watch?v=ukbEFRi1Zl4&t=1s)
