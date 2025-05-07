@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -60, "left": -60, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-serial-monitor", "id": "serial1", "top": 160, "left": 0, "attrs": {} }
+  ],
+  "connections": [
+    [ "led1:A", "uno:13", "green", [ "v0" ] ],
+    [ "led1:C", "uno:GND", "black", [ "v0" ] ],
+    [ "uno:TX", "serial1:RX", "black", [] ],
+    [ "uno:RX", "serial1:TX", "black", [] ],
+    [ "led1:C", "uno:GND.1", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
