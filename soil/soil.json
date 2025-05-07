@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0
+    },
+    {
+      "type": "wokwi-soil-moisture-sensor",
+      "id": "soil1",
+      "top": -50,
+      "left": -100,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-serial-monitor",
+      "id": "serial1",
+      "top": 140,
+      "left": 0,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "soil1:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "soil1:GND", "uno:GND", "black", [ "v0" ] ],
+    [ "soil1:SIG", "uno:A0", "green", [ "v0" ] ],
+    [ "uno:TX", "serial1:RX", "black", [] ],
+    [ "uno:RX", "serial1:TX", "black", [] ]
+  ],
+  "dependencies": {}
+}
