@@ -1,0 +1,29 @@
+#define DOOR_LOCK_PIN 7  // LED represents the door lock
+
+String authorizedUID = "123456AB";  // Mock authorized UID
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(DOOR_LOCK_PIN, OUTPUT);
+  digitalWrite(DOOR_LOCK_PIN, LOW);
+  Serial.println("RFID Smart Lock System Started");
+  Serial.println("Enter RFID UID (e.g., 123456AB):");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String scannedUID = Serial.readStringUntil('\n');
+    scannedUID.trim();
+
+    if (scannedUID == authorizedUID) {
+      digitalWrite(DOOR_LOCK_PIN, HIGH);
+      Serial.println("✅ Access Granted. Door Unlocked.");
+      Serial.println("📡 Uploading log... (simulated)");
+      delay(3000);
+      digitalWrite(DOOR_LOCK_PIN, LOW);
+      Serial.println("🔒 Door Locked.");
+    } else {
+      Serial.println("❌ Access Denied for UID: " + scannedUID);
+    }
+  }
+}
