@@ -1,18 +1,39 @@
 const int sensorPin = A0;  // Analog pin connected to soil moisture sensor
+const int pumpPin = 13;    // Digital pin connected to water pump (simulated as an LED or relay)
+
+// Threshold for soil moisture to trigger irrigation
+const int moistureThreshold = 40;  // If soil moisture is less than 40%, we turn on the pump
 
 void setup() {
   Serial.begin(9600);
-  pinMode(sensorPin, INPUT);
-  Serial.println("🌱 Soil Moisture Monitoring Started...");
+  pinMode(sensorPin, INPUT);  // Soil moisture sensor pin
+  pinMode(pumpPin, OUTPUT);   // Pump pin (simulated as an LED/relay)
+  
+  Serial.println("🌱 Smart Irrigation System Started...");
 }
 
 void loop() {
-  int moistureValue = analogRead(sensorPin);
-  int percentage = map(moistureValue, 1023, 0, 0, 100); // Convert to %
+  // Read the soil moisture sensor value
+  int moistureValue = analogRead(sensorPin);  // Read analog value (0 to 1023)
   
-  Serial.print("Soil moisture: ");
-  Serial.print(percentage);
-  Serial.println("% → Sending to ThingSpeak...");
+  // Map the sensor value to a percentage (0 to 100%)
+  int moisturePercentage = map(moistureValue, 1023, 0, 0, 100); 
 
-  delay(5000); // Send every 5 seconds (simulate network delay)
+  // Print soil moisture percentage to serial monitor
+  Serial.print("Soil Moisture: ");
+  Serial.print(moisturePercentage);
+  Serial.println("%");
+
+  // Check if the soil moisture is below the threshold
+  if (moisturePercentage < moistureThreshold) {
+    // Turn on irrigation pump (simulate with LED or relay)
+    digitalWrite(pumpPin, HIGH);
+    Serial.println("Irrigation ON: Pump is running...");
+  } else {
+    // Turn off irrigation pump
+    digitalWrite(pumpPin, LOW);
+    Serial.println("Irrigation OFF: Pump is idle.");
+  }
+
+  delay(5000);  // Wait for 5 seconds before reading again
 }
