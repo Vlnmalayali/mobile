@@ -1,0 +1,22 @@
+#define LED_PIN 23
+
+void setup() {
+  Serial.begin(115200);     // Start serial communication at 115200 baud
+  pinMode(LED_PIN, OUTPUT); // Set LED pin as output
+  Serial.println("Send '1' to turn ON the LED, '0' to turn OFF the LED");
+}
+
+void loop() {
+  if (Serial.available()) {  // Check if Serial Monitor has data available
+    char receivedChar = Serial.read();  // Read the incoming byte
+
+    if (receivedChar == '1') {  // If '1' is received, turn on the LED
+      digitalWrite(LED_PIN, HIGH);  // Turn the LED on
+      Serial.println("LED ON");
+    } 
+    else if (receivedChar == '0') {  // If '0' is received, turn off the LED
+      digitalWrite(LED_PIN, LOW);  // Turn the LED off
+      Serial.println("LED OFF");
+    }
+  }
+}
