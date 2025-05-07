@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 125.4, "left": -0.6, "attrs": {} },
+    { "type": "wokwi-ds18b20", "id": "ds1", "top": -60, "left": -100, "attrs": {} },
+    { "type": "wokwi-ntc-temperature-sensor", "id": "ntc1", "top": -60, "left": 0, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": -60, "left": 100, "attrs": {} },
+    { "type": "wokwi-serial-monitor", "id": "serial1", "top": 160, "left": 0, "attrs": {} }
+  ],
+  "connections": [
+    [ "ds1:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "ds1:GND", "uno:GND", "black", [ "v0" ] ],
+    [ "ds1:DQ", "uno:2", "green", [ "v0" ] ],
+    [ "ntc1:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "ntc1:GND", "uno:GND", "black", [ "v0" ] ],
+    [ "ntc1:OUT", "uno:A0", "green", [ "v0" ] ],
+    [ "ldr1:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "ldr1:GND", "uno:GND", "black", [ "v0" ] ],
+    [ "ldr1:AO", "uno:A1", "green", [ "v0" ] ],
+    [ "uno:TX", "serial1:RX", "black", [] ],
+    [ "uno:RX", "serial1:TX", "black", [] ]
+  ],
+  "dependencies": {}
+}
