@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0 },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": -60,
+      "left": -90,
+      "attrs": { "temperature": "25", "humidity": "45" }
+    }
+  ],
+  "connections": [
+    [ "dht:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "dht:GND", "uno:GND.1", "black", [ "v0" ] ],
+    [ "dht:SDA", "uno:2", "green", [ "v0" ] ]
+  ],
+  "dependencies": {
+    "dht": "1.4.4"
+  }
+}
