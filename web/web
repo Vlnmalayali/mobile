@@ -1,0 +1,25 @@
+#define LED_PIN 13   // Built-in LED
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.println("💡 Smart Light System Started...");
+  Serial.println("Type 'ON' or 'OFF' in Serial Monitor to control LED");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String command = Serial.readStringUntil('\n');
+    command.trim(); // Remove whitespace
+
+    if (command == "ON") {
+      digitalWrite(LED_PIN, HIGH);
+      Serial.println("💡 LED turned ON (via web interface)");
+    } else if (command == "OFF") {
+      digitalWrite(LED_PIN, LOW);
+      Serial.println("💡 LED turned OFF (via web interface)");
+    } else {
+      Serial.println("❓ Unknown command. Type ON or OFF.");
+    }
+  }
+}
