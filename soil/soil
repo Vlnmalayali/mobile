@@ -1,0 +1,18 @@
+const int sensorPin = A0;  // Analog pin connected to soil moisture sensor
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(sensorPin, INPUT);
+  Serial.println("🌱 Soil Moisture Monitoring Started...");
+}
+
+void loop() {
+  int moistureValue = analogRead(sensorPin);
+  int percentage = map(moistureValue, 1023, 0, 0, 100); // Convert to %
+  
+  Serial.print("Soil moisture: ");
+  Serial.print(percentage);
+  Serial.println("% → Sending to ThingSpeak...");
+
+  delay(5000); // Send every 5 seconds (simulate network delay)
+}
