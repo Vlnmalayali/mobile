@@ -3,7 +3,7 @@
   "author": "OpenAI",
   "editor": "wokwi",
   "parts": [
-    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0 },
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
     {
       "type": "wokwi-dht22",
       "id": "dht",
@@ -14,10 +14,9 @@
   ],
   "connections": [
     [ "dht:VCC", "uno:5V", "red", [ "v0" ] ],
-    [ "dht:GND", "uno:GND.1", "black", [ "v0" ] ],
-    [ "dht:SDA", "uno:2", "green", [ "v0" ] ]
+    [ "dht:GND", "uno:GND", "black", [ "v0" ] ],
+    [ "dht:SDA", "uno:2", "green", [ "v0" ] ],
+    [ "dht:GND", "uno:GND.1", "black", [ "v0" ] ]
   ],
-  "dependencies": {
-    "dht": "1.4.4"
-  }
+  "dependencies": {}
 }
