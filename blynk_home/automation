@@ -1,0 +1,33 @@
+#define LIGHT_PIN 23  // Light connected to GPIO 23
+#define FAN_PIN 22    // Fan connected to GPIO 22
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LIGHT_PIN, OUTPUT);
+  pinMode(FAN_PIN, OUTPUT);
+  Serial.println("Mock Blynk Home Automation Started");
+  Serial.println("Send 'L1' to turn ON Light, 'L0' to turn OFF Light");
+  Serial.println("Send 'F1' to turn ON Fan, 'F0' to turn OFF Fan");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');  // Read full command
+
+    if (cmd == "L1") {
+      digitalWrite(LIGHT_PIN, HIGH);
+      Serial.println("Light ON");
+    } else if (cmd == "L0") {
+      digitalWrite(LIGHT_PIN, LOW);
+      Serial.println("Light OFF");
+    } else if (cmd == "F1") {
+      digitalWrite(FAN_PIN, HIGH);
+      Serial.println("Fan ON");
+    } else if (cmd == "F0") {
+      digitalWrite(FAN_PIN, LOW);
+      Serial.println("Fan OFF");
+    } else {
+      Serial.println("Unknown Command");
+    }
+  }
+}
