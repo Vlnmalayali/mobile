@@ -1,0 +1,36 @@
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS 2      // DS18B20 data pin
+#define NTC_PIN A0          // NTC analog temp sensor
+#define LDR_PIN A1          // LDR pin
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+void setup() {
+  Serial.begin(9600);
+  sensors.begin();
+  pinMode(NTC_PIN, INPUT);
+  pinMode(LDR_PIN, INPUT);
+  Serial.println("☁️ Mock Weather Station Started...");
+}
+
+void loop() {
+  sensors.requestTemperatures();
+  float tempDS18B20 = sensors.getTempCByIndex(0);
+
+  int ntcValue = analogRead(NTC_PIN);
+  float tempNTC = map(ntcValue, 0, 1023, -10, 50);  // Simulated range
+
+  int lightLevel = analogRead(LDR_PIN);
+  int lightPercent = map(lightLevel, 0, 1023, 0, 100);
+
+  Serial.println("📡 Sending weather data to cloud...");
+  Serial.print("DS18B20 Temp: "); Serial.print(tempDS18B20); Serial.println(" °C");
+  Serial.print("NTC Temp (simulated): "); Serial.print(tempNTC); Serial.println(" °C");
+  Serial.print("Light Level: "); Serial.print(lightPercent); Serial.println(" %");
+
+  Serial.println("------------------------------");
+  delay(5000);
+}
