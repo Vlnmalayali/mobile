@@ -1,0 +1,35 @@
+#define LIGHT_PIN 5
+#define FAN_PIN 6
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LIGHT_PIN, OUTPUT);
+  pinMode(FAN_PIN, OUTPUT);
+
+  Serial.println("Voice Control System Ready.");
+  Serial.println("Type commands like 'light on', 'light off', 'fan on', 'fan off'");
+}
+
+void loop() {
+  if (Serial.available()) {
+    String command = Serial.readStringUntil('\n');
+    command.trim();
+    command.toLowerCase();
+
+    if (command == "light on") {
+      digitalWrite(LIGHT_PIN, HIGH);
+      Serial.println("💡 Light turned ON");
+    } else if (command == "light off") {
+      digitalWrite(LIGHT_PIN, LOW);
+      Serial.println("💡 Light turned OFF");
+    } else if (command == "fan on") {
+      digitalWrite(FAN_PIN, HIGH);
+      Serial.println("🌀 Fan turned ON");
+    } else if (command == "fan off") {
+      digitalWrite(FAN_PIN, LOW);
+      Serial.println("🌀 Fan turned OFF");
+    } else {
+      Serial.println("❌ Unknown command: " + command);
+    }
+  }
+}
