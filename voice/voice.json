@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "ledLight",
+      "top": -50,
+      "left": -140,
+      "attrs": { "color": "yellow", "label": "Light" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledFan",
+      "top": -50,
+      "left": 60,
+      "attrs": { "color": "blue", "label": "Fan" }
+    },
+    { "type": "wokwi-resistor", "id": "r1", "top": -10, "left": -90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": -10, "left": 110, "attrs": { "value": "220" } },
+    { "type": "wokwi-serial-monitor", "id": "serial1", "top": 140, "left": 0, "attrs": {} }
+  ],
+  "connections": [
+    [ "uno:5", "r1:2", "green", [ "v0" ] ],
+    [ "r1:1", "ledLight:A", "green", [ "v0" ] ],
+    [ "ledLight:C", "uno:GND", "black", [ "v0" ] ],
+    [ "uno:6", "r2:2", "green", [ "v0" ] ],
+    [ "r2:1", "ledFan:A", "green", [ "v0" ] ],
+    [ "ledFan:C", "uno:GND", "black", [ "v0" ] ],
+    [ "uno:TX", "serial1:RX", "black", [] ],
+    [ "uno:RX", "serial1:TX", "black", [] ],
+    [ "ledLight:C", "uno:GND.1", "green", [ "v0" ] ],
+    [ "ledFan:C", "uno:GND.1", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
