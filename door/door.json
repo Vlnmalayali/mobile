@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "author": "OpenAI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "lockLed",
+      "top": -50,
+      "left": -140,
+      "attrs": { "color": "green", "label": "Door Lock" }
+    },
+    { "type": "wokwi-resistor", "id": "r1", "top": -10, "left": -90, "attrs": { "value": "220" } },
+    { "type": "wokwi-serial-monitor", "id": "serial1", "top": 120, "left": 0, "attrs": {} }
+  ],
+  "connections": [
+    [ "uno:7", "r1:2", "green", [ "v0" ] ],
+    [ "r1:1", "lockLed:A", "green", [ "v0" ] ],
+    [ "lockLed:C", "uno:GND", "black", [ "v0" ] ],
+    [ "uno:TX", "serial1:RX", "black", [] ],
+    [ "uno:RX", "serial1:TX", "black", [] ],
+    [ "lockLed:C", "uno:GND.1", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
